@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Net;
-using System.Net.Sockets;
+﻿using System.Net;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace SpotifyPlaylistQueryMod.Shared.Validation;
@@ -21,16 +20,16 @@ internal static partial class QueryValidationHelper
 
     public static bool IsValidQueryString(this ValidationContext context, string query)
     {
+        // Temporary solution: will be replaced in the future with a more advanced domain rules system.
         return Uri.TryCreate(query, UriKind.Absolute, out Uri? uri) &&
             (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps) &&
-            !uri.IsLoopback &&
-            IsNonLocalIpAddress(uri.Host);
+            (uri.Port is 80 or 443 || (uri.HostNameType != UriHostNameType.IPv4 && !uri.IsLoopback) || IsPublicIpv4Address(uri.Host));
     }
 
-    public static bool IsNonLocalIpAddress(string hostname)
+    public static bool IsPublicIpv4Address(string hostname)
     {
-        if (!IPAddress.TryParse(hostname, out IPAddress? ipAddress)) return true;
-        if (ipAddress.AddressFamily != AddressFamily.InterNetwork || IPAddress.IsLoopback(ipAddress)) return false;
+        if (!IPAddress.TryParse(hostname, out IPAddress? ipAddress)) return false;
+        if (IPAddress.IsLoopback(ipAddress)) return false;
 
         return ipAddress.GetAddressBytes() switch
         {
