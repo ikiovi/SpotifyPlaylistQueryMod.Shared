@@ -1,13 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using SpotifyPlaylistQueryMod.Shared.Enums;
 using SpotifyPlaylistQueryMod.Shared.Validation;
 
-namespace SpotifyPlaylistQueryMod.Shared.API;
+namespace SpotifyPlaylistQueryMod.Shared.API.DTO;
 
 public record CreatePlaylistQueryDTO : IValidatableObject
 {
     public string? TargetId { get; set; }
+    [JsonRequired]
     public required string SourceId { get; set; }
+    [JsonRequired]
     public required string Query { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext context)
@@ -43,6 +46,7 @@ public record UpdatePlaylistQueryDTO : CreatePlaylistQueryDTO
 
 public record PlaylistQueryDTO : UpdatePlaylistQueryDTO
 {
+    [JsonRequired]
     public required int Id { get; init; }
     public PlaylistQueryExecutionStatus ExecutionStatus { get; set; }
     public IEnumerable<string> ExecutionStatusStrings { get; }
