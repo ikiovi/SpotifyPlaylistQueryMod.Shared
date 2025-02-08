@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using SpotifyPlaylistQueryMod.Shared.Enums;
 using SpotifyPlaylistQueryMod.Shared.Validation;
 
-namespace SpotifyPlaylistQueryMod.Shared.API.DTO;
+namespace SpotifyPlaylistQueryMod.Shared.QueryAPI.DTO;
 
 public record CreatePlaylistQueryDTO : IValidatableObject
 {

@@ -10,8 +10,3 @@ public class UserDTO
     public UserPrivileges Privileges { get; set; }
     public bool IsCollaborationEnabled { get; set; }
 }
-
-public sealed class UserCollaborationStatusUpdateDTO
-{
-    public bool IsCollaborationEnabled { get; set; }
-}

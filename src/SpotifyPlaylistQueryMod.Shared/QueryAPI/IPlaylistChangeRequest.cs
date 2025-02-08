@@ -1,6 +1,6 @@
 ﻿using SpotifyPlaylistQueryMod.Shared.Enums;
 
-namespace SpotifyPlaylistQueryMod.Shared.API;
+namespace SpotifyPlaylistQueryMod.Shared.QueryAPI;
 
 public interface IPlaylistChangeRequest<out T> where T : IBasicTrackInfo
 {

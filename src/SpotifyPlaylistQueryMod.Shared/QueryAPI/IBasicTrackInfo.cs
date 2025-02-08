@@ -1,4 +1,4 @@
-﻿namespace SpotifyPlaylistQueryMod.Shared.API;
+﻿namespace SpotifyPlaylistQueryMod.Shared.QueryAPI;
 
 public interface IBasicTrackInfo
 {

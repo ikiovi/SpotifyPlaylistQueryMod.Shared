@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using SpotifyPlaylistQueryMod.Shared.Enums;
 
-namespace SpotifyPlaylistQueryMod.Shared.API.DTO;
+namespace SpotifyPlaylistQueryMod.Shared.QueryAPI.DTO;
 
 public class PlaylistChangeRequestDTO : IPlaylistChangeRequest<BasicTrackInfoDTO>
 {

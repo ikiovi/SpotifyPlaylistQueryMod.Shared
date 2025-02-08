@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SpotifyPlaylistQueryMod.Shared.API.DTO;
+namespace SpotifyPlaylistQueryMod.Shared.QueryAPI.DTO;
 
 public class BasicTrackInfoDTO : IBasicTrackInfo
 {
