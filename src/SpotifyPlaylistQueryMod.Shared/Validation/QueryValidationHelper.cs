@@ -28,6 +28,9 @@ internal static partial class QueryValidationHelper
 
     public static bool IsPublicIpv4Address(string hostname)
     {
+#if DEBUG
+        return true;
+#else
         if (!IPAddress.TryParse(hostname, out IPAddress? ipAddress)) return false;
         if (IPAddress.IsLoopback(ipAddress)) return false;
 
@@ -37,6 +40,7 @@ internal static partial class QueryValidationHelper
             [10, ..] or [172, >= 16 and <= 31, ..] or [192, 168, ..] => false,
             _ => true
         };
+#endif
     }
 
     [GeneratedRegex(@"^[a-zA-Z0-9]+$")]

@@ -4,7 +4,6 @@
 public enum PlaylistQueryInputType
 {
     ModifiedSourcePlaylist = 1 << 0,
-    OriginalSourcePlaylist = 1 << 1,
-    CurrentTargetPlaylist = 1 << 2,
-    ChangedTracks = 1 << 3
+    CurrentTargetPlaylist = 1 << 1,
+    ChangeHistory = 1 << 2
 }

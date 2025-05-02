@@ -7,11 +7,13 @@ namespace SpotifyPlaylistQueryMod.Shared.API.DTO;
 
 public record CreatePlaylistQueryDTO : IValidatableObject
 {
+    public string Name { get; set; } = nameof(Query);
     public string? TargetId { get; set; }
     [JsonRequired]
     public required string SourceId { get; set; }
     [JsonRequired]
     public required string Query { get; set; }
+
 
     public IEnumerable<ValidationResult> Validate(ValidationContext context)
     {
@@ -23,15 +25,29 @@ public record CreatePlaylistQueryDTO : IValidatableObject
         if (TargetId == SourceId)
         {
             results.Add(new ValidationResult(
-                $"{nameof(SourceId)} and {nameof(TargetId)} shouldn't be the same.",
+                $"{nameof(SourceId)} and {nameof(TargetId)} must not be the same.",
                 [nameof(SourceId), nameof(TargetId)]
             ));
         }
         if (!context.IsValidQueryString(Query))
         {
             results.Add(new ValidationResult(
-                $"{nameof(Query)} should be valid http(s) url.",
+                $"{nameof(Query)} must be valid and well-formed HTTP(S) url.",
                 [nameof(Query)]
+            ));
+        }
+        if (string.IsNullOrEmpty(Name))
+        {
+            results.Add(new ValidationResult(
+                $"{nameof(Name)} must not be null or an empty string.",
+                [nameof(Name)]
+            ));
+        }
+        if (Name.Length >= 30)
+        {
+            results.Add(new ValidationResult(
+                 $"{nameof(Name)} must be less than 30 characters long.",
+                [nameof(Name)]
             ));
         }
 
