@@ -21,7 +21,8 @@ public record PlaylistQueryDTO : UpdatePlaylistQueryDTO
     public PlaylistQueryExecutionStatus ExecutionStatus { get; set; }
     public IEnumerable<string> ExecutionStatusStrings { get; }
     public bool IsSuperseded { get; set; }
-    public bool IsNotificationOnly => TargetId == null && !IsSuperseded;
+    public bool IsNotificationOnly => TargetId is null && !IsSuperseded;
+
     public PlaylistQueryDTO(PlaylistQueryExecutionStatus status)
     {
         ExecutionStatus = status;
